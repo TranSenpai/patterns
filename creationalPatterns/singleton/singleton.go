@@ -58,3 +58,20 @@ func GetEmployeeInstace(ch chan any) {
 	}
 	ch <- &singleEmployeeInstace
 }
+
+func Caller() {
+	ch := make(chan any)
+	for i := 0; i < 3; i++ {
+		go GetCarInstance(ch)
+		a := <-ch
+		fmt.Println(a)
+	}
+
+	for i := 0; i < 3; i++ {
+		go GetEmployeeInstace(ch)
+		a := <-ch
+		fmt.Println(a)
+	}
+}
+
+// Singleton adapt:

@@ -1,0 +1,1 @@
+explain how to assemble (lắp ráp, kết nối) objects and classes into larger structures while keeping these structures flexiable and efficent

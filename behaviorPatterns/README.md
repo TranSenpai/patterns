@@ -1,0 +1,1 @@
+concerned with (liên quan đến) algorithms and the assignment of responsibilities (phân công trách nhiệm) between objects
