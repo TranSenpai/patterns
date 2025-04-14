@@ -1,5 +1,29 @@
 package singleton
 
+// What
+//	- is a creational design pattern
+//	- ensure a class has only one instance
+//	- provide a global point of access to it
+
+// Where
+//	- when you want to control the number of instances
+//	  and provide a single point of access to it
+
+// When
+//	- want to make sure that a class has only one instance
+
+// Why
+// 	- to control access to shared resources, such as a file or a database connection
+//	- to provide a global point of access to the instance
+//	- to avoid the overhead of creating multiple instances of a class
+//	- to provide a single point of access to the instance
+
+// How
+//	- use a private constructor to prevent instantiation from outside the class
+//	- use a method to provide access to the instance
+//	- use a global variable to hold the instance
+//	- use a mutex to ensure thread safety
+
 import (
 	"fmt"
 	"sync"

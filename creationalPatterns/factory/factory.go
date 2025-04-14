@@ -1,5 +1,6 @@
 package factory
 
+// as known as Virtual Constructor
 // What:
 //	- is a creational design pattern
 //	- provides an interface for creating objects in a superclass
@@ -27,45 +28,9 @@ package factory
 //	- create a struct (class) has a factory method or just factory method
 //	  that return's type of this method matches the product interface
 
-import "fmt"
-
-// Product interface
-type Notify interface {
-	Send()
-}
-
-// Concrete Products
-type mail struct{}
-
-func NewMail() *mail {
-	return &mail{}
-}
-
-func (m mail) Send() {
-	fmt.Println("Mail")
-}
-
-type app struct{}
-
-func NewApp() *app {
-	return &app{}
-}
-
-func (a app) Send() {
-	fmt.Println("App")
-}
-
-type sms struct{}
-
-func NewSMS() *sms {
-	return &sms{}
-}
-
-func (s sms) Send() {
-	fmt.Println("SMS")
-}
-
 // Factory struct (class) have factory method
+// Or just a factory method
+
 type notifyFactory struct {
 	lst map[string]Notify
 }
@@ -82,17 +47,6 @@ func (n notifyFactory) GetNotify(kind string) Notify {
 
 func (n notifyFactory) SetNotify(kind string, not Notify) {
 	n.lst[kind] = not
-}
-
-func Caller() {
-	factory := NewFactory()
-	//
-	sms := NewSMS()
-	//
-	factory.SetNotify("sms", sms)
-	//
-	factory.GetNotify("sms")
-	factory.GetNotify("sms").Send()
 }
 
 // factory adapt

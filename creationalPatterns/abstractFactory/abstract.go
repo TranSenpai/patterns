@@ -1,9 +1,5 @@
 package abstractfactory
 
-import (
-	"fmt"
-)
-
 // What
 //	- is a creational design pattern
 //	- produce families of related objects (các đối tượng liên quan)
@@ -28,38 +24,6 @@ import (
 //  - create a separate factory class based on the AbstractFactory interface.
 // 	  A factory is a class that returns products of a particular kind.
 
-type Drink interface {
-	Drink()
-}
-
-type Food interface {
-	Food()
-}
-
-type cake struct{}
-
-func (c cake) Food() {
-	fmt.Println("Cake")
-}
-
-type grilledOctopus struct{}
-
-func (o grilledOctopus) Food() {
-	fmt.Println("Grilled Octopus")
-}
-
-type beer struct{}
-
-func (b beer) Drink() {
-	fmt.Println("Beer")
-}
-
-type coffee struct{}
-
-func (c coffee) Drink() {
-	fmt.Println("Coffee")
-}
-
 // declare the Abstract Factory—an interface with a list of creation methods
 // for all products that are part of the product family. These methods must return
 // abstract product types represented by the interfaces we extracted previously
@@ -68,6 +32,7 @@ type ComboAbstractFactory interface {
 	GetFood() Food
 }
 
+// Family 1:
 type DrinkAndForgetTheWayHomeComboFactory struct{}
 
 func (drunk DrinkAndForgetTheWayHomeComboFactory) GetDrink() Drink {
@@ -78,34 +43,14 @@ func (drunk DrinkAndForgetTheWayHomeComboFactory) GetFood() Food {
 	return grilledOctopus{}
 }
 
-type ComboName struct {
-	lst map[string]ComboAbstractFactory
+// Family 2:
+
+type MorningHealthy struct{}
+
+func (m MorningHealthy) GetDrink() Drink {
+	return coffee{}
 }
 
-func (c ComboName) GetCombo(k string) ComboAbstractFactory {
-	return c.lst[k]
-}
-
-func (c ComboName) SetCombo(k string, ca ComboAbstractFactory) {
-	c.lst[k] = ca
-}
-
-func Caller() {
-	// Create combo
-	drunkCombo := DrinkAndForgetTheWayHomeComboFactory{}
-
-	// Create combo list
-	comboList := ComboName{
-		lst: map[string]ComboAbstractFactory{},
-	}
-
-	// Add to combo list
-	comboList.SetCombo("drunk", drunkCombo)
-
-	// Get combo
-	selectedCombo := comboList.GetCombo("drunk")
-
-	// Get food and drink from combo
-	selectedCombo.GetDrink().Drink() // Output: Beer
-	selectedCombo.GetFood().Food()   // Output: Grilled Octopus
+func (m MorningHealthy) GetFood() Food {
+	return cake{}
 }
